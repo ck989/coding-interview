@@ -14,7 +14,8 @@ void* AlignedMalloc(size_t type){
     
     while(1){
         RetPtr = malloc(type);
-        
+
+        //condition for alignment check
         if(((uintptr_t)RetPtr & (alignment - 1)) == 0){
             printf("%p\n", (uintptr_t)RetPtr);
             printf("address is %d byte aligned\n",alignment);
