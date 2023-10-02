@@ -19,9 +19,10 @@ void strrev(char* str){
 char* itoa(int val){
     char* str = (char*)malloc(10*sizeof(char)); //assuming size of string to be 10
     int index = 0;
+    int sign = 0;
     
     if(val < 0){
-        str[index++] = '-';
+        sign = 1;
         val = -val;
     }
     
@@ -30,14 +31,17 @@ char* itoa(int val){
         val /= 10;
     }
     
-    strrev(&str[1]);
+    if(sign)
+        str[index++] = '-';
+        
+    strrev(str);
     
     return str;
 }
 
 int main() {
     
-    int val = -1234;
+    int val = 1239964;
     char* str = itoa(val);
     printf("%s", str);
     free(str);
