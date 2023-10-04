@@ -29,3 +29,12 @@ int main() {
     printAllCombinations(target);
     return 0;
 }
+
+
+/*
+Output:
+All possible combinations of positive integers that add up to 3:
+1 1 1 
+1 2 
+3 
+*/
