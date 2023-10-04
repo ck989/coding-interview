@@ -1,37 +1,50 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 
-typedef struct _LinkedList{
-    int a;
-    struct _LinkedList* Next;
-}LinkedList;
+void* aligned_malloc(size_t size, size_t alignment) {
+    void *ptr = NULL;
+    void *aligned_ptr = NULL;
 
-void* AlignedMalloc(size_t type){
-    size_t alignment = type;
-    void* RetPtr;
-    
-    while(1){
-        RetPtr = malloc(type);
-
-        //condition for alignment check
-        if(((uintptr_t)RetPtr & (alignment - 1)) == 0){
-            printf("%p\n", (uintptr_t)RetPtr);
-            printf("address is %d byte aligned\n",alignment);
-            break;
-        }
-        
-        free(RetPtr);
+    // Ensure alignment is a power of 2
+    if ((alignment & (alignment - 1)) != 0) {
+        fprintf(stderr, "Alignment must be a power of 2.\n");
+        return NULL;
     }
-    
-    return RetPtr;
+
+    // Allocate memory with extra bytes for alignment
+    ptr = malloc(size + alignment - 1);
+    if (ptr == NULL) {
+        perror("malloc");
+        return NULL;
+    }
+
+    // Calculate the aligned pointer within the allocated block
+    uintptr_t addr = (uintptr_t)ptr;
+    size_t offset = (alignment - (addr % alignment)) % alignment;
+    aligned_ptr = (void*)(addr + offset);
+
+    return aligned_ptr;
 }
 
 int main() {
-    // Write C code here
-    //input any data type here
-    LinkedList* a = (LinkedList*)AlignedMalloc(sizeof(LinkedList));
-    printf("Aligned malloc success..\n");
-    free(a);
+    size_t size = 100;  // Size of memory to allocate
+    size_t alignment = 16;  // Desired alignment
+
+    // Allocate aligned memory
+    void* aligned_memory = aligned_malloc(size, alignment);
+    if (aligned_memory == NULL) {
+        printf("Failed to allocate aligned memory.\n");
+    } else {
+        printf("Successfully allocated aligned memory at address: %p\n", aligned_memory);
+        free(aligned_memory);  // Don't forget to free the allocated memory
+    }
 
     return 0;
 }
+The aligned_malloc function takes the desired size and alignment as arguments and returns a pointer to the allocated memory with the specified alignment. It first ensures that the alignment is a power of 2, then allocates extra memory to ensure alignment, calculates the aligned pointer, and returns it. The main function demonstrates how to use the aligned_malloc function to allocate aligned memory.
+
+
+
+
+
