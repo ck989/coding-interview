@@ -142,3 +142,11 @@ int main() {
     
     return 0;
 }
+
+/*
+output:
+Before
+1	1	2	3	3	4	5	6	3	6	7	8	
+After
+1	2	3	4	5	6	7	8
+*/
