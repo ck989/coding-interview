@@ -94,7 +94,6 @@ LinkedList* HasCycle(LinkedList* HeadPtr, int len){
         Curr_Node = Curr_Node->Next;
     }
     
-    printf("done1\n");
     return NULL;
 }
 
