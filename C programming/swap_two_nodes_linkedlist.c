@@ -88,7 +88,7 @@ bool Swap_Nodes(LinkedList** HeadPtr, int val1, int val2){
             Node1->Next = Node2;
             Node2->Next = temp_node;            
         }
-    }else{
+    }else{ //if the swapping between two different nodes which are not adjacent.
         temp_node = Node2->Next; //temp node stores node2's next address for a while
         Prev_Node1->Next = Node2;
         Node2->Next = Node1->Next;
