@@ -115,7 +115,7 @@ int main() {
     printf("Before\n");
     Print(&Head);
     
-    bool swap_flag = Swap_Nodes(&Head, 9, 10);    
+    bool swap_flag = Swap_Nodes(&Head, 4, 8);    
     
     if(swap_flag){
         printf("After\n");
