@@ -42,3 +42,12 @@ int main()
 
     return 0;
 }
+
+/*
+output:
+Reversing a bit using iterative method
+0xa3
+Reversing a bit using bitwise method
+0xa3
+Both passed
+*/
