@@ -21,3 +21,9 @@ int main()
     
     return 0;
 }
+
+/*
+output:
+res1 : 0x1c
+res2 : 0xc1
+*/
