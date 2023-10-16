@@ -25,7 +25,8 @@ void pack_buffer(uint8_t* in_buff, uint32_t in_buff_len, uint8_t* out_buff){
     out_buff[0] = in_buff[0]; //assign first byte
     for(uint8_t i = 1; i <= in_buff_len; i++){
         
-        out_buff[i] = prev_missed_bits << (INT_BITS - (i - 1)) | in_buff[i] >> i | (1 << INT_BITS - i); //account missed_bits from the previous iteration and insert bit 1
+        out_buff[i] = prev_missed_bits << (INT_BITS - (i - 1)) | (1 << INT_BITS - i) | in_buff[i] >> i; //account missed_bits from the previous iteration, insert bit 1 with corresponding offset 
+                                                                                                        //and right shift the input buffer by respective offset (offset depends in iteration value)
         prev_missed_bits = in_buff[i] & mask_bits(i);
     }
 }
