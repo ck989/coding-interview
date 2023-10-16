@@ -26,9 +26,9 @@ int Find_Missing_num_XOR(int* arr, int n){
     }
     
     int xorNums = 1;
-    for(int i = 1; i < n; i++){
+    for(int i = 2; i <= n+1; i++){
         xorNums ^= i; 
-    }    
+    }  
     
     int missing_num = xorArray ^ xorNums;
     if(missing_num == 0)
