@@ -5,16 +5,13 @@
 
 #define INT_BITS 8
 
-/*
-ToDo: Optimize mask_bits function
-*/
 //if itr 1, the mask bit is 1'b, if it is 2, the mask bit is 11'b and so on..
 uint8_t mask_bits(uint8_t itr){
-    if(itr == 1) return 0x01;
-    else if(itr == 2) return 0x03;
-    else if(itr == 3) return 0x07;
-    else if(itr == 4) return 0x0F;
-    else if(itr == 5) return 0x1F;
+    // Ensure itr is within bounds (0-7)
+    itr = (itr > 7) ? 7 : itr;
+
+    // Create a mask with the first 'itr' bits set
+    return (1 << itr) - 1;
 }
 
 //Insert bit 1 for every 8 bits..
