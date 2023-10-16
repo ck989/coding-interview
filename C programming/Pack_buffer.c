@@ -5,11 +5,10 @@
 
 #define INT_BITS 8
 
-//if itr 1, the mask bit is 1'b, if it is 2, the mask bit is 11'b and so online
-
 /*
 ToDo: Optimize mask_bits function
 */
+//if itr 1, the mask bit is 1'b, if it is 2, the mask bit is 11'b and so online
 uint8_t mask_bits(uint8_t itr){
     if(itr == 1) return 0x01;
     else if(itr == 2) return 0x03;
