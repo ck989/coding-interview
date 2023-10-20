@@ -38,7 +38,7 @@ void Print_palindrome(char* str, int* mid, int len){
     }
     printf("\n");
     
-    *mid = end_index;                        
+    *mid = end_index;   //update mid with updated value to avoid printing the substring palindrome                     
 }
 
 void Plindrome(char* str, int len){
