@@ -12,7 +12,7 @@ conditions:
 #include <string.h>
 
 void Print_palindrome(char* str, int* mid, int len){
-    int init_index = *mid, end_index = *mid+1; //frtch an adjacent characters
+    int init_index = *mid, end_index = *mid+1; //fetch two adjacent characters
     
     if(str[init_index] != str[end_index]){ // compare with adjacent chars
         end_index++;
