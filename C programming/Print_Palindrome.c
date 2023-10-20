@@ -14,9 +14,9 @@ conditions:
 void Print_palindrome(char* str, int* mid, int len){
     int init_index = *mid, end_index = *mid+1; //fetch two adjacent characters
     
-    if(str[init_index] != str[end_index]){ // compare with adjacent chars
-        end_index++;
-        if(str[init_index] != str[end_index]){ 
+    if(str[init_index] != str[end_index]){ // compare those
+        end_index++;         //if not equal increment second index
+        if(str[init_index] != str[end_index]){ //again compare those chars
             return;         //there won't be any palindrome possibility, hence exit
         }
     }
