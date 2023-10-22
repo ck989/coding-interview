@@ -1,5 +1,5 @@
 /******************************************************************************
-print all palindrome strings in the given string under the following conditions.
+print palindrome strings in the given string under the following conditions.
 conditions:
  1. xieeix is a palindrome in the main string but you are not supposed to 
     print ieei since it is substring of previosuly printed palindrome
