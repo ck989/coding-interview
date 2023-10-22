@@ -42,7 +42,7 @@ void Print_palindrome(char* str, int* mid, int len){
 }
 
 void Plindrome(char* str, int len){
-    int i = 1;
+    int i = 0;
     while(i < len){
         Print_palindrome(str, &i, len);
         i++;
