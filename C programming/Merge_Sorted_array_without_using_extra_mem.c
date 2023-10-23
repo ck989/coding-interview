@@ -20,9 +20,9 @@ void Gap_Algorithm(int* arr1, int* arr2, int n, int m){
         int index2 = index1 + Gap;
         while(index2 < len){
             if((index1 < n) && (index2 >= n)){ //when one of them is in left and other one in right array
-                SwapIfGreater(arr1, arr2, index1, index2 % m);
+                SwapIfGreater(arr1, arr2, index1, index2 - n);
             }else if(index1 >= n){// when both of them are in right array
-                SwapIfGreater(arr2, arr2, index1 % m, index2 % m);
+                SwapIfGreater(arr2, arr2, index1 - n, index2 - n);
             }else{//when both of them are in left array
                 SwapIfGreater(arr1, arr1, index1, index2);
             }
@@ -60,5 +60,5 @@ int main() {
 Output: 
 After Sorting
 0	1	2	3	
-6	7	8	9	5	
+5   6	7	8	9	
 */
