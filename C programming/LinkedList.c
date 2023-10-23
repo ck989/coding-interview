@@ -6,8 +6,6 @@ typedef struct _LinkedList{
     struct _LinkedList* Next;
 }LinkedList;
 
-LinkedList* CycleNode = NULL;
-
 void InsertList(LinkedList** HeadPtr, int val){
     LinkedList* New_node = (LinkedList*)malloc(sizeof(LinkedList));
     New_node->data = val;
