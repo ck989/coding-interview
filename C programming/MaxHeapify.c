@@ -36,7 +36,7 @@ void MaxHeapify(int* arr, int n){
 int main() {
     
     int arr[MAX_ARRAY_SZ] = {3, 6, 8, 2, 5, 1, 4, 7};
-    MaxHeapify(arr, MAX_ARRAY_SZ - 1);
+    MaxHeapify(arr, MAX_ARRAY_SZ);
     for(int i = 0; i < MAX_ARRAY_SZ; i++){
         printf("%d\t",arr[i]);
     }
