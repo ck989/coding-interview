@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -59,9 +51,10 @@ void Reverse_SubList(LinkedList** HeadPtr, int val1, int val2){
     //2. Perform reversing by declaring the new prev_node = NULL 
     LinkedList* Next_Node;
     LinkedList* temp_Node = Curr_Node;
+    LinkedList* End_Node = Node2->Next;
     LinkedList* Prev_node = NULL; 
     
-    while(Curr_Node != Node2->Next){
+    while(Curr_Node != End_Node){
         Next_Node = Curr_Node->Next;
         Curr_Node->Next = Prev_node;
         Prev_node = Curr_Node;
@@ -70,7 +63,7 @@ void Reverse_SubList(LinkedList** HeadPtr, int val1, int val2){
     
     //3. Update pointers after reversing the sublists
     Left_Prev_Node->Next = Prev_node;
-    temp_Node->Next = Node2;
+    temp_Node->Next = End_Node;
 }
 
 void Print(LinkedList** HeadPtr){
@@ -106,3 +99,11 @@ int main() {
     
     return 0;
 }
+
+/*
+output:
+Before
+1       2       3       4       5       6       7       8
+After
+1       2       7       6       5       4       3       8
+*/
