@@ -1,32 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void printCombinations(int target, int start, int *combination, int length) {
-    if (target == 0) {
-        // Print the combination
-        for (int i = 0; i < length; i++) {
-            printf("%d ", combination[i]);
+void PrintCombo(int target, int start, int* combo, int length){
+    
+    if(target == 0){
+        for(int i = 0; i < length; i++){
+            printf("%d \t", combo[i]);
         }
         printf("\n");
-        return;
     }
-
-    for (int i = start; i <= target; i++) {
-        combination[length] = i;
-        printCombinations(target - i, i, combination, length + 1);
+    
+    for(int i=start; i <= target; i++){
+        combo[length] = i;
+        PrintCombo(target - i, start, combo, length + 1);
     }
 }
 
-void printAllCombinations(int target) {
-    int* combination = (int*)malloc(target * sizeof(int));
-    printCombinations(target, 1, combination, 0);
-    free(combination); // Free the dynamically allocated memory
+void PrintAllCombinations(int target){
+    int* combo = (int*)malloc(target*sizeof(int));
+    PrintCombo(target, 1, combo, 0);
+    free(combo);
 }
 
 int main() {
     int target = 3;
     printf("All possible combinations of positive integers that add up to %d:\n", target);
-    printAllCombinations(target);
+    PrintAllCombinations(target);
     return 0;
 }
 
@@ -34,7 +33,8 @@ int main() {
 /*
 Output:
 All possible combinations of positive integers that add up to 3:
-1 1 1 
-1 2 
+1       1       1 
+1       2 
+2       1 
 3 
 */
