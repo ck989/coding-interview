@@ -11,20 +11,38 @@ void* aligned_malloc(size_t size, size_t alignment) {
         fprintf(stderr, "Alignment must be a power of 2.\n");
         return NULL;
     }
-
-    // Allocate memory with extra bytes for alignment
-    ptr = malloc(size + alignment - 1);
+    
+    /*
+     Allocate memory with extra bytes for alignment and Allocate for sizeof(void*),
+     the reason sizeof(void*) is it will be useful for freeing the memory because
+     we are not returning the address returned by the malloc, we need some space
+     to store the actual address returned by the malloc
+    */
+    ptr = malloc(size + alignment + sizeof(void*));
     if (ptr == NULL) {
         perror("malloc");
         return NULL;
     }
-
-    // Calculate the aligned pointer within the allocated block
-    uintptr_t addr = (uintptr_t)ptr;
-    size_t offset = (alignment - (addr % alignment)) % alignment;
-    aligned_ptr = (void*)(addr + offset);
-
+    
+    /*
+     Calculate the aligned pointer within the allocated block, this math ensures that 
+     the aligned_ptr address is multiple of alignment, overallocating sizeof(void*) to
+     makespace to store the original malloc address
+    */
+    uintptr_t addr = (uintptr_t)ptr + alignment + sizeof(void*);
+    aligned_ptr = (void*)(addr - (addr % alignment));
+    
+    //store the original address above aligned_ptr address to freeing this address further
+    *((uintptr_t*)aligned_ptr - 1) = (uintptr_t)ptr;
+    
     return aligned_ptr;
+}
+
+void aligned_free(void* ptr){
+    
+    //deference the original malloc address to free
+    free((void*)(*((uintptr_t*)ptr - 1)));
+    printf("aligned_free done\n");
 }
 
 int main() {
@@ -37,8 +55,13 @@ int main() {
         printf("Failed to allocate aligned memory.\n");
     } else {
         printf("Successfully allocated aligned memory at address: %p\n", aligned_memory);
-        free(aligned_memory);  // Don't forget to free the allocated memory
+        aligned_free(aligned_memory);
     }
 
     return 0;
 }
+
+/*
+Successfully allocated aligned memory at address: 0x560f968f72b0
+aligned_free done
+*/
