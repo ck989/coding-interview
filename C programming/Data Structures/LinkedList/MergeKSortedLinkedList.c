@@ -1,3 +1,7 @@
+
+/*
+Refer this youtube: https://www.youtube.com/watch?v=0_PSq3j8GrY
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
