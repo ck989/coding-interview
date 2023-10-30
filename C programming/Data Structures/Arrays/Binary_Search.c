@@ -1,62 +1,41 @@
-/*
-  V0 U0 V1 U1 V2 U2 V3 U3 V4 U4
-  V5 U5 V6 U6 V7 U7 V8 U8 V9 U9
-  V10 U10 V11 U11 V12 U12 V13 U13
-  
-  V0 V1 V2 V3 V4 
-  V5 V6 V7 V8 V9
-  V10 V11 V12 V13
-  U0 U1 U2 U3 U4
-  U5 U6 U7 U8 U9 
-  U10 U11 U13 
-  
-*/
 #include <stdio.h>
-#include <stdbool.h>
 
-bool Vint(int index){
-    return !(index & 0x01);
-}
+int binarySearch(int arr[], int left, int right, int target) {
+    while (left <= right) {
+        int mid = (left + right)/2;
 
-bool Uint(int index){
-    return (index & 0x01);
-}
+        // If target is found, return the index
+        if (arr[mid] == target)
+            return mid;
 
-void ArrangePicxels(int* pIndx, int Width, int Height, int* pOutx){
-    int i = 0, j = 0;
-    int len = Height * Width;
-    
-    for(i = 0; i < len; i++){
-        if(Vint(i)){
-            pOutx[j++] = pIndx[i];
-        }
+        // If target is greater, ignore the left half
+        if (arr[mid] < target)
+            left = mid + 1;
+
+        // If target is smaller, ignore the right half
+        else
+            right = mid - 1;
     }
-  
-    for(i = 0; i < len; i++){
-        if(Uint(i)){
-            pOutx[j++] = pIndx[i];
-        }
-    }  
-    
+
+    // Target element is not present in the array
+    return -1;
 }
 
 int main() {
-    
-    int pIndx[18] = {1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5};
-    int Height = 3;
-    int Width = 6;
-    int pOutx[18];
-    
-    ArrangePicxels(pIndx, Width, Height, pOutx);
-    
-    printf("output Array: \n");
-    for (int i = 0; i < 18; i++){
-        printf("%d\t",pOutx[i]);
-    }
+    int arr[] = {1, 3, 5, 7, 9, 11, 13};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int target = 7;
+
+    int index = binarySearch(arr, 0, size - 1, target);
+
+    if (index != -1)
+        printf("Element %d found at index %d.\n", target, index);
+    else
+        printf("Element %d not found in the array.\n", target);
+
     return 0;
 }
 
 /*
-output Array: 
-1	1	1	1	1	1	1	1	1	5	5	5	5	5	5	5	5	5
+Element 7 found at index 3.
 */
