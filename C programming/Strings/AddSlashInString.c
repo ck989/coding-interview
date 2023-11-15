@@ -23,6 +23,26 @@ void Add_Slash(char* str)
     
 }
 
+/*
+Alternate solution:
+void addSlash(char* str) {
+    int i = 0;
+        
+    while(str[i] != '\0'){
+        
+        if (str[i] == '<' || str[i] == '>' || str[i] == '\\') {
+            // Shift characters to the right to make space for the backslash
+            memmove(&str[i] + 1, &str[i], strlen(&str[i]) + 1);
+            
+            // Add the backslash
+            str[++i] = '\\';
+        }
+        i++;
+    }
+
+}
+*/
+
 int main()
 {
     char str[20] = "<hello> world \\"; //inputting a stting
