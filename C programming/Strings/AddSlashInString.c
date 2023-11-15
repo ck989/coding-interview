@@ -41,6 +41,9 @@ void addSlash(char* str) {
     }
 
 }
+output: 
+Input String: <hello> world \
+Output String: <\hello>\ world \\
 */
 
 int main()
