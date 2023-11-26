@@ -3,6 +3,8 @@ Refer this youtube link:
 https://www.youtube.com/watch?v=1pkOgXD63yU
 */
 
+#define MAX_NUM(x, y) (x > y)?x:y
+
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -14,15 +16,14 @@ public:
 
         while (r < len){
             if(prices[l] >= prices[r]){
-                l = r;
-                r++;
+                l = r++;
             }else{
                 curr_max = prices[r] - prices[l];
-                if(curr_max > final_max)
-                    final_max = curr_max;
+                final_max = MAX_NUM(curr_max, final_max);
                 r++;
             }
         }
+
         return final_max;
     }
 };
