@@ -46,12 +46,12 @@ Node* MergeLinkList(const Node* l1, const Node* l2){
         }
     }
     
-    if(l1 != NULL){
+    while(l1 != NULL){
         Add2List(&Res_List, l1->val);
         l1 = l1->Next;        
     }
     
-    if(l2 != NULL){
+    while(l2 != NULL){
         Add2List(&Res_List, l2->val);
         l2 = l2->Next;        
     }
