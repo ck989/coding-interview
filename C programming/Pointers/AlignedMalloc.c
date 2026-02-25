@@ -24,12 +24,16 @@ void* aligned_malloc(size_t size, size_t alignment) {
         return NULL;
     }
     
+    if (((uintptr_t)ptr & (alignment - 1)) == 0) {
+        printf("returned address is already aligned.\n");
+    }
     /*
      Calculate the aligned pointer within the allocated block, this math ensures that 
      the aligned_ptr address is multiple of alignment, overallocating sizeof(void*) to
      makespace to store the original malloc address
     */
     uintptr_t addr = (uintptr_t)ptr + alignment + sizeof(void*);
+    // aligned_ptr = (void*)(addr & ~(alignment - 1));
     aligned_ptr = (void*)(addr - (addr % alignment));
     
     //store the original address above aligned_ptr address to freeing this address further
@@ -39,7 +43,6 @@ void* aligned_malloc(size_t size, size_t alignment) {
 }
 
 void aligned_free(void* ptr){
-    
     //deference the original malloc address to free
     free((void*)(*((uintptr_t*)ptr - 1)));
     printf("aligned_free done\n");
